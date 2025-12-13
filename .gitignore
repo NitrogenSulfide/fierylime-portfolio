@@ -1,0 +1,70 @@
+# =========================
+# Global
+# =========================
+.DS_Store
+Thumbs.db
+*.log
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS / editor junk
+*.swp
+*.swo
+
+# =========================
+# Node / Next.js
+# =========================
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Java / Spring Boot
+# =========================
+target/
+build/
+.gradle/
+.gradle.kts
+*.class
+
+# Maven / Gradle wrappers (keep these)
+!mvnw
+!mvnw.cmd
+!.mvn/
+!gradlew
+!gradlew.bat
+!gradle/
+
+# =========================
+# Database
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+# =========================
+# Docker / Infra
+# =========================
+docker-compose.override.yml
+*.local.yml
+
+# =========================
+# Security / Secrets
+# =========================
+*.key
+*.pem
+*.p12
+*.jks
+secrets/

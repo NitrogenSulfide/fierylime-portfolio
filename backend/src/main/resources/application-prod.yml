@@ -16,3 +16,6 @@ spring:
 logging:
   level:
     org.flywaydb: INFO
+
+server:
+  port: ${PORT:8080}

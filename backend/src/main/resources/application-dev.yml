@@ -19,6 +19,11 @@ spring:
     baseline-version: 0
     validate-on-migrate: true
 
+  security:
+    user:
+      name: ${BASIC_AUTH_USER}
+      password: ${BASIC_AUTH_PASSWORD}
+
 logging:
   level:
     org.flywaydb: DEBUG

@@ -14,7 +14,7 @@ export default function ResumeExperience({ experience }: ResumeExperienceProps) 
                     <div key={`${exp.company}-${exp.role}`}>
                         <h3 className="font-medium">{exp.company}</h3>
                         <p className="text-sm text-neutral-400">
-                            {exp.role} · {exp.startDate} – {exp.endDate}
+                            {exp.role} · {exp.dateRange}
                         </p>
                         <ul className="mt-2 list-disc space-y-1 pl-5 text-neutral-300">
                             {exp.bullets.map((bullet) => (

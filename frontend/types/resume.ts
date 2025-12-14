@@ -19,8 +19,7 @@ export interface ResumeOverview {
 export interface ResumeExperience {
     company: string;
     role: string;
-    startDate: string;
-    endDate: string;
+    dateRange: string;
     bullets: string[];
 }
 

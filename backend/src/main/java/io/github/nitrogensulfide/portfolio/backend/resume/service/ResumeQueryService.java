@@ -64,18 +64,21 @@ public class ResumeQueryService {
 
         return jdbcTemplate.query(
                 sql,
-                (rs, rowNum) -> new ResumeExperienceDto(
-                        UUID.fromString(rs.getString("id")),
-                        rs.getString("company"),
-                        rs.getString("role"),
-                        rs.getString("start_date"),
-                        rs.getString("end_date"),
-                        rs.getString("description") != null
-                                ? List.of(rs.getString("description"))
-                                : List.of()
-                )
+                (rs, rowNum) -> {
+                    String startDate = rs.getString("start_date");
+                    String endDate = rs.getString("end_date");
+
+                    return new ResumeExperienceDto(
+                            UUID.fromString(rs.getString("id")),
+                            rs.getString("company"),
+                            rs.getString("role"),
+                            formatDateRange(startDate, endDate),
+                            splitBullets(rs.getString("description"))
+                    );
+                }
         );
     }
+
 
     private ResumeSkillsDto loadSkills() {
         String sql = """
@@ -135,6 +138,33 @@ public class ResumeQueryService {
         });
     }
 
+    private List<String> splitBullets(String description) {
+        if (description == null || description.isBlank()) {
+            return List.of();
+        }
+
+        return Arrays.stream(description.split("\\r?\\n"))
+                .map(String::trim)
+                .filter(line -> !line.isEmpty())
+                .toList();
+    }
+
+    private String formatDateRange(String startDate, String endDate) {
+        String start = formatYearMonth(startDate);
+
+        if (endDate == null) {
+            return start + " – Present";
+        }
+
+        return start + " – " + formatYearMonth(endDate);
+    }
+
+    private String formatYearMonth(String isoDate) {
+        if (isoDate == null || isoDate.length() < 7) {
+            return "";
+        }
+        return isoDate.substring(0, 7); // yyyy-MM
+    }
 
 
 }

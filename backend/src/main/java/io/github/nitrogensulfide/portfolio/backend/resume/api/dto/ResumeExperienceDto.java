@@ -7,7 +7,7 @@ public record ResumeExperienceDto(
         UUID id,
         String company,
         String role,
-        String startDate,
-        String endDate,
+        String dateRange,
         List<String> bullets
 ) {}
+

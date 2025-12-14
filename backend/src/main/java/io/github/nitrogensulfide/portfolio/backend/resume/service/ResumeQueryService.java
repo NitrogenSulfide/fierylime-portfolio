@@ -53,11 +53,33 @@ public class ResumeQueryService {
         });
     }
 
+    private Map<UUID, List<String>> loadExperienceBullets() {
+        String sql = """
+        SELECT experience_id, content
+        FROM portfolio.public.resume_experience_bullet
+        ORDER BY experience_id, sort_order
+    """;
 
+        return jdbcTemplate.query(sql, rs -> {
+            Map<UUID, List<String>> map = new HashMap<>();
+
+            while (rs.next()) {
+                UUID experienceId = UUID.fromString(rs.getString("experience_id"));
+                String content = rs.getString("content");
+
+                map.computeIfAbsent(experienceId, k -> new ArrayList<>())
+                        .add(content);
+            }
+
+            return map;
+        });
+    }
 
     private List<ResumeExperienceDto> loadExperience() {
+        Map<UUID, List<String>> bulletsByExperience = loadExperienceBullets();
+
         String sql = """
-        SELECT id, company, role, start_date, end_date, description
+        SELECT id, company, role, start_date, end_date
         FROM portfolio.public.resume_experience
         ORDER BY start_date DESC
     """;
@@ -65,19 +87,22 @@ public class ResumeQueryService {
         return jdbcTemplate.query(
                 sql,
                 (rs, rowNum) -> {
-                    String startDate = rs.getString("start_date");
-                    String endDate = rs.getString("end_date");
+                    UUID id = UUID.fromString(rs.getString("id"));
 
                     return new ResumeExperienceDto(
-                            UUID.fromString(rs.getString("id")),
+                            id,
                             rs.getString("company"),
                             rs.getString("role"),
-                            formatDateRange(startDate, endDate),
-                            splitBullets(rs.getString("description"))
+                            formatDateRange(
+                                    rs.getString("start_date"),
+                                    rs.getString("end_date")
+                            ),
+                            bulletsByExperience.getOrDefault(id, List.of())
                     );
                 }
         );
     }
+
 
 
     private ResumeSkillsDto loadSkills() {
@@ -136,17 +161,6 @@ public class ResumeQueryService {
                     year
             );
         });
-    }
-
-    private List<String> splitBullets(String description) {
-        if (description == null || description.isBlank()) {
-            return List.of();
-        }
-
-        return Arrays.stream(description.split("\\r?\\n"))
-                .map(String::trim)
-                .filter(line -> !line.isEmpty())
-                .toList();
     }
 
     private String formatDateRange(String startDate, String endDate) {

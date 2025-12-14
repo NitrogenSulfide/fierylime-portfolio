@@ -109,7 +109,7 @@ public class ResumeQueryService {
         String sql = """
         SELECT name, category
         FROM portfolio.public.resume_skill
-        ORDER BY created_at
+        ORDER BY category, proficiency_level DESC, name
     """;
 
         List<String> languages = new ArrayList<>();
@@ -122,14 +122,12 @@ public class ResumeQueryService {
             switch (category) {
                 case "LANGUAGE" -> languages.add(name);
                 case "TOOL" -> tools.add(name);
-                default -> {
-                    // ignore unknown categories for now
-                }
             }
         });
 
         return new ResumeSkillsDto(languages, tools);
     }
+
 
     private ResumeEducationDto loadEducation() {
         String sql = """

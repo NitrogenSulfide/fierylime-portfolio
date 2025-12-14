@@ -1,23 +1,39 @@
 export interface ResumeResponse {
     version: string;
-    overview: {
-        summary: string;
-    };
-    experience: {
-        id: string;
-        company: string;
-        role: string;
-        startDate: string;
-        endDate: string;
-        bullets: string[];
-    }[];
-    skills: {
-        languages: string[];
-        tools: string[];
-    };
-    education: {
-        degree: string;
-        institution: string;
-        year: string;
-    };
+    overview: ResumeOverview
+    experience: ResumeExperience[]
+    skills: ResumeSkills;
+    education: ResumeEducation;
+}
+
+export interface ResumeOverview {
+    fullName: string;
+    headline: string;
+    summary: string;
+    location: string;
+    website: string;
+    linkedin: string;
+    github: string;
+}
+
+export interface ResumeExperience {
+    company: string;
+    role: string;
+    startDate: string;
+    endDate: string;
+    bullets: string[];
+}
+
+export interface ResumeSkills {
+    languages: string[];
+    tools: string[];
+}
+
+export interface ResumeEducation {
+    institution: string;
+    degree: string;
+    fieldOfStudy: string;
+    startDate: string;
+    endDate: string;
+    description: string;
 }

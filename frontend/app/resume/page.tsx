@@ -158,12 +158,23 @@ export default function ResumePage() {
             </nav>
 
 
+            {/*<ResumeOverview overview={resume.overview} />*/}
             {activeSection === "overview" && (
-                <ResumeOverview summary={resume.overview.summary} />
+                <ResumeOverview overview={resume.overview} />
             )}
-            {activeSection === "experience" && <ResumeExperience />}
-            {activeSection === "skills" && <ResumeSkills />}
-            {activeSection === "education" && <ResumeEducation />}
+
+            {activeSection === "experience" && (
+                <ResumeExperience experience={resume.experience} />
+            )}
+
+            {activeSection === "skills" && (
+                <ResumeSkills skills={resume.skills} />
+            )}
+
+            {activeSection === "education" && (
+                <ResumeEducation education={resume.education} />
+            )}
+
         </PageLayout>
     );
 }

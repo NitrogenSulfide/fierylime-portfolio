@@ -1,6 +1,13 @@
 package io.github.nitrogensulfide.portfolio.backend.resume.api.dto;
 
 public record ResumeOverviewDto(
-        String summary
+        String fullName,
+        String headline,
+        String summary,
+        String location,
+        String website,
+        String linkedin,
+        String github
 ) {}
+
 

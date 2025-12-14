@@ -1,13 +1,22 @@
+import { ResumeOverview as ResumeOverviewType } from "@/types/resume";
+
 export default function ResumeOverview({
-                                           summary,
+                                           overview,
                                        }: {
-    summary: string;
+    overview: ResumeOverviewType;
 }) {
     return (
-        <section>
-            <h2 className="text-xl font-medium">Overview</h2>
-            <p className="mt-4 max-w-2xl text-neutral-400">
-                {summary}
+        <section id="overview" className="space-y-2">
+            <h1 className="text-3xl font-semibold">
+                {overview.fullName}
+            </h1>
+
+            <p className="text-neutral-400">
+                {overview.headline}
+            </p>
+
+            <p className="max-w-2xl text-neutral-300">
+                {overview.summary}
             </p>
         </section>
     );

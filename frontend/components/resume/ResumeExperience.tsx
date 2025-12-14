@@ -1,12 +1,16 @@
-import { resumeExperience } from "@/data/resume.data";
+import { ResumeExperience as ResumeExperienceType } from "@/types/resume";
 
-export default function ResumeExperience() {
+interface ResumeExperienceProps {
+    experience: ResumeExperienceType[];
+}
+
+export default function ResumeExperience({ experience }: ResumeExperienceProps) {
     return (
         <section id="experience" className="mb-16 scroll-mt-24">
             <h2 className="text-3xl font-medium">Experience</h2>
 
             <div className="mt-6 space-y-8">
-                {resumeExperience.map((exp) => (
+                {experience.map((exp) => (
                     <div key={`${exp.company}-${exp.role}`}>
                         <h3 className="font-medium">{exp.company}</h3>
                         <p className="text-sm text-neutral-400">

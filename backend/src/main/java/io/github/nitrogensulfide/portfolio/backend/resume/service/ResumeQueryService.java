@@ -28,7 +28,7 @@ public class ResumeQueryService {
 
     private ResumeOverviewDto loadOverview() {
         String sql = """
-        SELECT summary
+        SELECT full_name, headline, summary, location, website, linkedin, github
         FROM portfolio.public.resume_profile
         ORDER BY updated_at DESC
         LIMIT 1
@@ -36,11 +36,23 @@ public class ResumeQueryService {
 
         return jdbcTemplate.query(sql, rs -> {
             if (!rs.next()) {
-                return new ResumeOverviewDto("");
+                return new ResumeOverviewDto(
+                        "", "", "", "", "", "", ""
+                );
             }
-            return new ResumeOverviewDto(rs.getString("summary"));
+
+            return new ResumeOverviewDto(
+                    rs.getString("full_name"),
+                    rs.getString("headline"),
+                    rs.getString("summary"),
+                    rs.getString("location"),
+                    rs.getString("website"),
+                    rs.getString("linkedin"),
+                    rs.getString("github")
+            );
         });
     }
+
 
 
     private List<ResumeExperienceDto> loadExperience() {

@@ -1,13 +1,17 @@
-import {resumeEducation} from "@/data/resume.data";
+import { ResumeEducation as ResumeEducationType } from "@/types/resume";
 
-export default function ResumeEducation() {
+interface ResumeEducationProps {
+    education: ResumeEducationType;
+}
+
+export default function ResumeEducation({ education }: ResumeEducationProps) {
     return (
         <section id="education" className="mb-16 scroll-mt-24">
             <h2 className="text-3xl font-medium">Education</h2>
             <div className="mt-4">
                 <p className="mt-2">
-                    <span className="font-medium">{resumeEducation.degree}</span>
-                    <span className="text-neutral-400"> • {resumeEducation.institution} • {resumeEducation.year}</span>
+                    <span className="font-medium">{education.degree}</span>
+                    <span className="text-neutral-400"> • {education.institution} • {education.startDate} • {education.endDate}</span>
                 </p>
             </div>
         </section>

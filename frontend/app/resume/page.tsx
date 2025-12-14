@@ -29,6 +29,12 @@ export default function ResumePage() {
         }
     }, [sectionParam]);
 
+    useEffect(() => {
+        if (!sectionParam) {
+            router.replace("?section=overview", { scroll: false });
+        }
+    }, [sectionParam, router]);
+
     return (
         <PageLayout>
             <h1 className="text-3xl font-semibold">Resume</h1>

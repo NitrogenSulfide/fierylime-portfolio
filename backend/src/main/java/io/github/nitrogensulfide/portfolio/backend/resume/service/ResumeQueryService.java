@@ -69,7 +69,7 @@ public class ResumeQueryService {
         String sql = """
         SELECT name, category
         FROM portfolio.public.resume_skill
-        ORDER BY created_at ASC
+        ORDER BY created_at
     """;
 
         List<String> languages = new ArrayList<>();

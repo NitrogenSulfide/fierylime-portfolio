@@ -2,7 +2,7 @@ import { resumeExperience } from "@/data/resume.data";
 
 export default function ResumeExperience() {
     return (
-        <section className="mb-16">
+        <section id="experience" className="mb-16 scroll-mt-24">
             <h2 className="text-xl font-medium">Experience</h2>
 
             <div className="mt-6 space-y-8">

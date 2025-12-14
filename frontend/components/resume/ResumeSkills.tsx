@@ -2,7 +2,7 @@ import {resumeSkills} from "@/data/resume.data";
 
 export default function ResumeSkills() {
     return (
-        <section className="mb-16">
+        <section id="skills" className="mb-16 scroll-mt-24">
             <h2 className="text-xl font-medium">Skills</h2>
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">

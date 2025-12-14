@@ -22,7 +22,7 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/health/**").permitAll()
 
                         // Public read-only API
-                        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/public/**").permitAll()
 
                         // Admin area is always protected
                         .requestMatchers("/api/admin/**").authenticated()

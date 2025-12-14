@@ -1,10 +1,15 @@
+import {resumeEducation} from "@/data/resume.data";
+
 export default function ResumeEducation() {
     return (
         <section>
             <h2 className="text-xl font-medium">Education</h2>
-            <p className="mt-2 text-neutral-400">
-                Degree · Institution · Year
-            </p>
+            <div className="mt-4">
+                <p className="mt-2">
+                    <span className="font-medium">{resumeEducation.degree}</span>
+                    <span className="text-neutral-400"> • {resumeEducation.institution} • {resumeEducation.year}</span>
+                </p>
+            </div>
         </section>
     );
 }

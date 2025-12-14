@@ -1,3 +1,5 @@
+import {resumeSkills} from "@/data/resume.data";
+
 export default function ResumeSkills() {
     return (
         <section className="mb-16">
@@ -7,14 +9,14 @@ export default function ResumeSkills() {
                 <div>
                     <h3 className="font-medium">Languages</h3>
                     <p className="text-sm text-neutral-400">
-                        Java, Kotlin, TypeScript, SQL
+                        {resumeSkills.languages.join(" • ")}
                     </p>
                 </div>
 
                 <div>
                     <h3 className="font-medium">Frameworks & Tools</h3>
                     <p className="text-sm text-neutral-400">
-                        Spring Boot, Next.js, PostgreSQL, Docker
+                        {resumeSkills.tools.join(" • ")}
                     </p>
                 </div>
             </div>

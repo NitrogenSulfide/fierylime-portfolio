@@ -1,10 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function PageLayout({
                                        children,
                                    }: {
     children: React.ReactNode;
 }) {
+    const pathname = usePathname();
     return (
         <>
             <header className="border-b border-neutral-800">
@@ -14,10 +18,49 @@ export default function PageLayout({
                     </Link>
 
                     <div className="flex gap-6 text-sm text-neutral-400">
-                        <Link href="/resume" className="hover:text-white">Resume</Link>
-                        <Link href="/projects" className="hover:text-white">Projects</Link>
-                        <Link href="/photography" className="hover:text-white">Photography</Link>
-                        <Link href="/piano" className="hover:text-white">Piano</Link>
+                        <Link
+                            href="/resume"
+                            className={
+                                pathname === "/resume"
+                                    ? "text-white"
+                                    : "text-neutral-400 hover:text-white"
+                            }
+                        >
+                            Resume
+                        </Link>
+
+                        <Link
+                            href="/projects"
+                            className={
+                                pathname === "/projects"
+                                    ? "text-white"
+                                    : "text-neutral-400 hover:text-white"
+                            }
+                        >
+                            Projects
+                        </Link>
+
+                        <Link
+                            href="/photography"
+                            className={
+                                pathname === "/photography"
+                                    ? "text-white"
+                                    : "text-neutral-400 hover:text-white"
+                            }
+                        >
+                            Photography
+                        </Link>
+
+                        <Link
+                            href="/piano"
+                            className={
+                                pathname === "/piano"
+                                    ? "text-white"
+                                    : "text-neutral-400 hover:text-white"
+                            }
+                        >
+                            Piano
+                        </Link>
                     </div>
                 </nav>
             </header>

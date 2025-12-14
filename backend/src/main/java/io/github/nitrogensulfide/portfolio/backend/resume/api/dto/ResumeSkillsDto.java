@@ -1,4 +1,8 @@
 package io.github.nitrogensulfide.portfolio.backend.resume.api.dto;
 
-public class ResumeSkillsDto {
-}
+import java.util.List;
+
+public record ResumeSkillsDto(
+        List<String> languages,
+        List<String> tools
+) {}

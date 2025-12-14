@@ -1,4 +1,7 @@
 package io.github.nitrogensulfide.portfolio.backend.resume.api.dto;
 
-public class ResumeEducationDto {
-}
+public record ResumeEducationDto(
+        String degree,
+        String institution,
+        String year
+) {}

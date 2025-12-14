@@ -1,4 +1,13 @@
 package io.github.nitrogensulfide.portfolio.backend.resume.api.dto;
 
-public class ResumeExperienceDto {
-}
+import java.util.List;
+import java.util.UUID;
+
+public record ResumeExperienceDto(
+        UUID id,
+        String company,
+        String role,
+        String startDate,
+        String endDate,
+        List<String> bullets
+) {}

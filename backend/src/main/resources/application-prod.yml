@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:${DATABASE_URL}
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
@@ -10,10 +10,6 @@ spring:
   flyway:
     enabled: true
     validate-on-migrate: true
-
-logging:
-  level:
-    org.flywaydb: INFO
 
 server:
   address: 0.0.0.0

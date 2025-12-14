@@ -1,11 +1,13 @@
-import { resumeOverview } from "@/data/resume.data";
-
-export default function ResumeOverview() {
+export default function ResumeOverview({
+                                           summary,
+                                       }: {
+    summary: string;
+}) {
     return (
-        <section id="overview" className="mb-16 scroll-mt-24">
-            <h1 className="text-3xl font-medium">Overview</h1>
+        <section>
+            <h2 className="text-xl font-medium">Overview</h2>
             <p className="mt-4 max-w-2xl text-neutral-400">
-                {resumeOverview.summary}
+                {summary}
             </p>
         </section>
     );

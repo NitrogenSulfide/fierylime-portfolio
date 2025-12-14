@@ -13,7 +13,7 @@ public class ResumeQueryService {
     public ResumeResponse getDefaultResume() {
 
         ResumeOverviewDto overview = new ResumeOverviewDto(
-                "Full-stack engineer with experience in data platforms, backend systems, and modern frontend frameworks."
+                "\uD83D\uDEA8 BACKEND HARDCODED STRING \uD83D\uDEA8"
         );
 
         ResumeExperienceDto experience = new ResumeExperienceDto(

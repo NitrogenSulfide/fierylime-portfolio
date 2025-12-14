@@ -10,6 +10,8 @@ import ResumeExperience from "@/components/resume/ResumeExperience";
 import ResumeSkills from "@/components/resume/ResumeSkills";
 import ResumeEducation from "@/components/resume/ResumeEducation";
 
+import { ResumeResponse } from "@/types/resume";
+
 const sections = ["overview", "experience", "skills", "education"] as const;
 type Section = (typeof sections)[number];
 
@@ -33,6 +35,9 @@ export default function ResumePage() {
     const [activeSection, setActiveSection] = useState<Section>(
         sections.includes(sectionParam as Section) ? sectionParam! : "overview"
     );
+
+    const [resume, setResume] = useState<ResumeResponse | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (sectionParam && sections.includes(sectionParam)) {
@@ -60,6 +65,49 @@ export default function ResumePage() {
             );
         }
     }, [versionParam, activeSection, activeVersion, router]);
+
+    useEffect(() => {
+        async function loadResume() {
+            try {
+                const res = await fetch("/api/resume");
+
+                if (!res.ok) {
+                    const text = await res.text();
+                    console.error("Resume API error:", res.status, text);
+                    setResume(null);
+                    setLoading(false);
+                    return;
+                }
+
+                const data: ResumeResponse = await res.json();
+                setResume(data);
+            } catch (err) {
+                console.error("Failed to load resume:", err);
+                setResume(null);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadResume();
+    }, []);
+
+    if (loading) {
+        return (
+            <PageLayout>
+                <p className="text-neutral-400">Loading resume…</p>
+            </PageLayout>
+        );
+    }
+
+    if (!resume) {
+        return (
+            <PageLayout>
+                <p className="text-red-400">Failed to load resume.</p>
+            </PageLayout>
+        );
+    }
+
 
     return (
         <PageLayout>
@@ -110,7 +158,9 @@ export default function ResumePage() {
             </nav>
 
 
-            {activeSection === "overview" && <ResumeOverview />}
+            {activeSection === "overview" && (
+                <ResumeOverview summary={resume.overview.summary} />
+            )}
             {activeSection === "experience" && <ResumeExperience />}
             {activeSection === "skills" && <ResumeSkills />}
             {activeSection === "education" && <ResumeEducation />}

@@ -13,9 +13,20 @@ import ResumeEducation from "@/components/resume/ResumeEducation";
 const sections = ["overview", "experience", "skills", "education"] as const;
 type Section = (typeof sections)[number];
 
+const versions = ["default", "backend", "frontend"] as const;
+type ResumeVersion = (typeof versions)[number];
+
+
 export default function ResumePage() {
     const router = useRouter();
     const searchParams = useSearchParams();
+
+    const versionParam = searchParams.get("version") as ResumeVersion | null;
+    const [activeVersion, setActiveVersion] = useState<ResumeVersion>(
+        versions.includes(versionParam as ResumeVersion)
+            ? versionParam!
+            : "default"
+    );
 
     const sectionParam = searchParams.get("section") as Section | null;
 
@@ -35,10 +46,50 @@ export default function ResumePage() {
         }
     }, [sectionParam, router]);
 
+    useEffect(() => {
+        if (versionParam && versions.includes(versionParam)) {
+            setActiveVersion(versionParam);
+        }
+    }, [versionParam]);
+
+    useEffect(() => {
+        if (!versionParam) {
+            router.replace(
+                `?section=${activeSection}&version=${activeVersion}`,
+                { scroll: false }
+            );
+        }
+    }, [versionParam, activeSection, activeVersion, router]);
+
     return (
         <PageLayout>
             <h1 className="text-3xl font-semibold">Resume</h1>
 
+            {/*Resume version selector*/}
+            <div className="mt-8 mb-6 flex gap-2 text-sm">
+                {versions.map((version) => (
+                    <button
+                        key={version}
+                        onClick={() => {
+                            setActiveVersion(version);
+                            router.push(
+                                `?section=${activeSection}&version=${version}`,
+                                { scroll: false }
+                            );
+                        }}
+                        className={
+                            activeVersion === version
+                                ? "rounded-md bg-neutral-800 px-3 py-1 text-white"
+                                : "rounded-md px-3 py-1 text-neutral-400 hover:text-white"
+                        }
+                    >
+                        {version.charAt(0).toUpperCase() + version.slice(1)}
+                    </button>
+                ))}
+            </div>
+
+
+            {/*Section Tabs*/}
             <nav className="mt-8 mb-12 flex gap-6 text-sm">
                 {sections.map((id) => (
                     <button

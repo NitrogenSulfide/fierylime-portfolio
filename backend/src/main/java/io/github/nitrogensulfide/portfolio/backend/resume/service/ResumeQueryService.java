@@ -19,7 +19,6 @@ public class ResumeQueryService {
 
     public ResumeResponse getDefaultResume() {
         return new ResumeResponse(
-                "default",
                 loadOverview(),
                 loadExperience(),
                 loadSkills(),

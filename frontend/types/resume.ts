@@ -1,9 +1,8 @@
 export interface ResumeResponse {
-    version: string;
-    overview: ResumeOverview
-    experience: ResumeExperience[]
+    overview: ResumeOverview;
+    experience: ResumeExperience[];
     skills: ResumeSkills;
-    education: ResumeEducation;
+    education: ResumeEducation[];
 }
 
 export interface ResumeOverview {
@@ -29,10 +28,11 @@ export interface ResumeSkills {
 }
 
 export interface ResumeEducation {
+    id: string;
     institution: string;
     degree: string;
     fieldOfStudy: string;
     startDate: string;
-    endDate: string;
-    description: string;
+    endDate: string | null;
+    description?: string;
 }

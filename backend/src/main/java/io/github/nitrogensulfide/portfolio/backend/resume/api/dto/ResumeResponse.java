@@ -7,6 +7,7 @@ public record ResumeResponse(
         ResumeOverviewDto overview,
         List<ResumeExperienceDto> experience,
         ResumeSkillsDto skills,
-        ResumeEducationDto education
+        List<ResumeEducationDto> education
 ) {}
+
 

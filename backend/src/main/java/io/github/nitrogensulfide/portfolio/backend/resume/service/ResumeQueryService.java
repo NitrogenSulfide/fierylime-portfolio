@@ -5,6 +5,7 @@ import io.github.nitrogensulfide.portfolio.backend.resume.api.dto.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -129,37 +130,34 @@ public class ResumeQueryService {
     }
 
 
-    private ResumeEducationDto loadEducation() {
+    private List<ResumeEducationDto> loadEducation() {
         String sql = """
-        SELECT institution, degree, start_date, end_date
+        SELECT
+            id,
+            institution,
+            degree,
+            field_of_study,
+            start_date,
+            end_date,
+            description
         FROM portfolio.public.resume_education
-        ORDER BY end_date DESC NULLS LAST, start_date DESC
-        LIMIT 1
+        ORDER BY start_date DESC
     """;
 
-        return jdbcTemplate.query(sql, rs -> {
-            if (!rs.next()) {
-                // No education yet — return empty DTO
-                return new ResumeEducationDto("", "", "");
-            }
-
-            String endDate = rs.getString("end_date");
-            String startDate = rs.getString("start_date");
-
-            String year =
-                    endDate != null && endDate.length() >= 4
-                            ? endDate.substring(0, 4)
-                            : (startDate != null && startDate.length() >= 4
-                            ? startDate.substring(0, 4)
-                            : "");
-
-            return new ResumeEducationDto(
-                    rs.getString("degree"),
-                    rs.getString("institution"),
-                    year
-            );
-        });
+        return jdbcTemplate.query(
+                sql,
+                (rs, rowNum) -> new ResumeEducationDto(
+                        UUID.fromString(rs.getString("id")),
+                        rs.getString("institution"),
+                        rs.getString("degree"),
+                        rs.getString("field_of_study"),
+                        rs.getObject("start_date", LocalDate.class),
+                        rs.getObject("end_date", LocalDate.class),
+                        rs.getString("description")
+                )
+        );
     }
+
 
     private String formatDateRange(String startDate, String endDate) {
         String start = formatYearMonth(startDate);

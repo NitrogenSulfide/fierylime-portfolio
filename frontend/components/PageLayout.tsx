@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { siteConfig } from '@/data/site';
+
 export default function PageLayout({
                                        children,
                                    }: {
@@ -14,7 +16,7 @@ export default function PageLayout({
             <header className="border-b border-neutral-800">
                 <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
                     <Link href="/" className="font-medium">
-                        Your Name
+                        {siteConfig.ownerName}
                     </Link>
 
                     <div className="flex gap-6 text-sm text-neutral-400">

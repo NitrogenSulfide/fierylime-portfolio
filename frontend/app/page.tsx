@@ -1,10 +1,12 @@
+import { siteConfig } from '@/data/site';
+
 export default function HomePage() {
   return (
       <main className="mx-auto max-w-5xl px-6 py-20">
         {/* Hero */}
         <section className="mb-20">
           <h1 className="text-4xl font-semibold tracking-tight">
-            Oliver Luo
+              {siteConfig.ownerName}
           </h1>
 
           <p className="mt-4 max-w-2xl text-lg text-neutral-400">

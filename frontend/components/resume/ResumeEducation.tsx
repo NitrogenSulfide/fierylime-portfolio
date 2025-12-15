@@ -18,7 +18,8 @@ export default function ResumeEducationSection({
     }
 
     return (
-        <section id="education" className="space-y-8">
+        <section id="education" className="space-y-4 mb-16 scroll-mt-24">
+            <h2 className="text-3xl font-medium">Education</h2>
             {education.map((edu) => (
                 <div key={edu.id} className="space-y-1">
                     <h3 className="text-lg font-medium">

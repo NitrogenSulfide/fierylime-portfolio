@@ -6,7 +6,7 @@ interface ResumeSkillsProps {
 
 export default function ResumeSkills({ skills }: ResumeSkillsProps) {
     return (
-        <section id="skills" className="mb-16 scroll-mt-24">
+        <section id="skills" className="space-y-4 mb-16 scroll-mt-24">
             <h2 className="text-3xl font-medium">Skills</h2>
 
             <div className="mt-4 grid gap-4 sm:grid-cols-2">

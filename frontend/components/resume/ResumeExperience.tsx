@@ -6,7 +6,7 @@ interface ResumeExperienceProps {
 
 export default function ResumeExperience({ experience }: ResumeExperienceProps) {
     return (
-        <section id="experience" className="mb-16 scroll-mt-24">
+        <section id="experience" className="space-y-4 mb-16 scroll-mt-24">
             <h2 className="text-3xl font-medium">Experience</h2>
 
             <div className="mt-6 space-y-8">

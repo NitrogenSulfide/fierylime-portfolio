@@ -6,7 +6,7 @@ export default function ResumeOverview({
     overview: ResumeOverviewType;
 }) {
     return (
-        <section id="overview" className="space-y-2">
+        <section id="overview" className="space-y-4 mb-16 scroll-mt-24">
             <h1 className="text-3xl font-semibold">
                 {overview.fullName}
             </h1>

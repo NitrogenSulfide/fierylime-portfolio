@@ -21,8 +21,8 @@ spring:
 
   security:
     user:
-      name: ${BASIC_AUTH_USER}
-      password: ${BASIC_AUTH_PASSWORD}
+      name: ${BASIC_AUTH_USER:user}
+      password: ${BASIC_AUTH_PASSWORD:change_me}
 
 logging:
   level:
